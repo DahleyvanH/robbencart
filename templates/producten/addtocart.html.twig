@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Naam</th>
+        <th>Prijs</th>
+        <th>Beschrijving</th>
+        <th>Aantal</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for array in cart %}
+        <tr>
+            {% set cart.totaal = 0 %}
+            <td>{{ array.id }}</td>
+            <td>{{ array.naam }}</td>
+            <td>{{ array.prijs }}</td>
+            <td>{{ array.beschrijving }}</td>
+            <td>{{ array.aantal }}</td>
+            {% set cart.totaal = cart.totaal +(array.aantal * array.prijs) %}
+            <td>
+                <a href="{{ path('producten_show', {'id': array.id}) }}">show</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock body %}
